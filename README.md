@@ -1,4 +1,4 @@
-# Spark jobs for NDS ingestion pipeline
+# Spark jobs for Hotjar ingestion pipeline
 
 ## Setup
 
