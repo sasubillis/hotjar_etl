@@ -4,7 +4,6 @@ import java.io._
 
 import com.typesafe.config.ConfigFactory
 import nds.etl.parsers.HJParser
-import nds.etl.sinks.Cassandra
 import org.apache.spark.sql.SparkSession
 
 /**

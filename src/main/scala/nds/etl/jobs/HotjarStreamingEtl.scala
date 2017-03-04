@@ -5,7 +5,6 @@ import java.io.File
 import com.typesafe.config.ConfigFactory
 import nds.etl.TransformationsHJ
 import nds.etl.parsers.{HotjarEvent, HotjarParser}
-import nds.etl.sinks.Cassandra
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.broadcast
