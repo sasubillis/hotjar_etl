@@ -23,11 +23,10 @@ object TransformationsHJ {
 
     hotjarEvents
       .select(
-        unix_timestamp(to_utc_timestamp(col("TIMESTAMP"), tz)).cast(IntegerType).as("time_stamp"),
         col("SITE_ID").as("site_id"),
         col("USER_ID").as("user_id"),
         col("URL").as("url"),
-        col("USER_ID").as("user_id"),
+        unix_timestamp(to_utc_timestamp(col("TIMESTAMP"), tz)).cast(IntegerType).as("time_stamp"),
         col("WINDOW_SIZE").as("window_size"),
         col("USER_AGENT").as("user_agent"),
         col("LANGUAGE").as("language"),

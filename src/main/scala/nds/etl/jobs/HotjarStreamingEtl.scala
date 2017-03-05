@@ -6,7 +6,7 @@ import com.typesafe.config.ConfigFactory
 import nds.etl.TransformationsHJ
 import nds.etl.parsers.{HotjarEvent, HotjarParser}
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{SQLContext, SaveMode}
 import org.apache.spark.sql.functions.broadcast
 import org.apache.spark.sql.types.{DoubleType, IntegerType}
 import org.apache.spark.streaming.dstream.DStream
@@ -56,8 +56,7 @@ object HotjarStreamingEtl {
 
     val rawDataStream = ssc.textFileStream(config.getString("hdfs-input-directory"))
     val stream: DStream[HotjarEvent] = rawDataStream.transform(rdd =>
-      //rdd.filter(line => line(0) != 'R' && line.split(",").length ==54).map(HotjarParser.parseFile(_)))
-      rdd.filter(line => line(0) != ' ' ).map(HotjarParser.parseFile(_)))
+      rdd.filter(line => line(0) != ' ' && line.split(",").length == 10).map(HotjarParser.parseFile(_)))
 
     stream.foreachRDD { rdd =>
       if (rdd.partitions.length > 0) {
@@ -68,7 +67,8 @@ object HotjarStreamingEtl {
         //Cassandra.saveDataFrame(config, enrichedEvents)
         //Reverted Save to Cassandra with Native API
         //Cassandra.saveCassandraWithNativeMode(config, normalizedEvents)
-        normalizedEvents.write.parquet("data.parquet")
+        normalizedEvents.write.mode(SaveMode.Append).parquet("hdfs://coord-1/nds-etl/output/hotjarevents.parquet")
+
 
       }
     }
