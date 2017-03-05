@@ -1,6 +1,5 @@
 import AssemblyKeys._ // put this at the top of the file,leave the next line blank
-
-assemblySettings
+seq(assemblySettings: _*)
 
 name := "hotjar-ingestion"
 

@@ -2,4 +2,5 @@ target
 .idea
 spark-warehouse
 data.parquet
-project
+project/project
+project/target
