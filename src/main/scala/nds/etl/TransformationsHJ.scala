@@ -33,7 +33,7 @@ object TransformationsHJ {
         col("LANGUAGE").as("language"),
         col("IPADDRESS").as("ipaddress"),
         col("TOOL_BEHAV_DATA").as("tool_behav_data"),
-        col("CLOCKS").as("clicks")
+        col("CLICKS").as("clicks")
       )
   }
 
